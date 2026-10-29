@@ -38,7 +38,6 @@ pip install nonebot-plugin-number-meme
 
 ```dotenv
 DRIVER=~fastapi
-COMMAND_START=["/"]
 ```
 
 ## 使用
@@ -55,7 +54,7 @@ COMMAND_START=["/"]
 400 = -114+514
 ```
 
-别名：`/HOMO`。更多例子：
+指令：`/HOMO`。更多例子：
 
 | 输入 | 输出 |
 | --- | --- |
@@ -76,7 +75,7 @@ COMMAND_START=["/"]
 42 = 67+6*7-67
 ```
 
-别名：`/six-seven`、`/sixseven`。更多例子：
+指令：`/six-seven`、`/sixseven`。更多例子：
 
 | 输入 | 输出 |
 | --- | --- |
