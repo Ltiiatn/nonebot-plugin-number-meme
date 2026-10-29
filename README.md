@@ -158,7 +158,6 @@ pytest
   - Copyright (c) 2020 itorr
 - `/67` 的数据表整理自 [67676767.net](https://67676767.net/) 的 Six Seven calculator
 
-两个数据集的算法实现均为本项目独立编写。
 
 ## 许可证
 
