@@ -5,7 +5,10 @@
 
 from __future__ import annotations
 
-from .core import GreedyTable
+from decimal import Decimal, InvalidOperation
+from fractions import Fraction
+
+from .core import GreedyTable, simplify
 
 __all__ = ["render", "seven_table"]
 
@@ -1019,6 +1022,44 @@ class SevenTable(GreedyTable):
 seven_table = SevenTable()
 
 
-def render(num: int) -> str:
-    """把整数改写成 67 风格表达式。"""
-    return seven_table.render(int(num))
+def _to_fraction(value: object) -> Fraction | None:
+    """把输入转成精确分数；不是数字就返回 None。
+
+    走 Decimal 是为了避免 0.1 这类浮点在二进制下的误差。
+    """
+    if isinstance(value, bool):
+        return None
+    try:
+        if isinstance(value, Fraction):
+            return value
+        if isinstance(value, float):
+            number = Decimal(repr(value))
+        elif isinstance(value, Decimal):
+            number = value
+        else:
+            number = Decimal(value)  # type: ignore[arg-type]
+    except (TypeError, ValueError, InvalidOperation):
+        return None
+    if not number.is_finite():
+        return None
+    return Fraction(number)
+
+
+def render(num: object) -> str:
+    """把数字改写成 67 风格表达式；无法处理时返回空字符串。
+
+    整数直接查表；小数/分数写成 ``(分子)/(分母)``，两边各自用 6、7 表示。
+    """
+    frac = _to_fraction(num)
+    if frac is None:
+        return ""
+
+    sign = "-" if frac < 0 else ""
+    frac = abs(frac)
+
+    if frac.denominator == 1:
+        return sign + seven_table.render(int(frac))
+
+    numerator = seven_table.render(frac.numerator)
+    denominator = seven_table.render(frac.denominator)
+    return sign + simplify(f"({numerator})/({denominator})")

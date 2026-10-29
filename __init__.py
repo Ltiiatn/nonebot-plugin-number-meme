@@ -34,7 +34,7 @@ seven = on_command("67", aliases={"six-seven", "sixseven"}, priority=10, block=T
 async def _reply(
     matcher: Matcher,
     text: str,
-    render: Callable[[int], str],
+    render: Callable[[object], str],
     max_input: int,
     max_length: int,
     *,
@@ -94,4 +94,5 @@ async def _(msg: Message = CommandArg()):
         render_seven,
         config.seven_max_input,
         config.seven_max_length,
+        allow_float=True,
     )
