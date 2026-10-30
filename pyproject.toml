@@ -1,6 +1,6 @@
 [project]
 name = "nonebot-plugin-number-meme"
-version = "0.1.0"
+version = "0.1.1"
 description = "把数字改写成「114514」或「6/7」风格等值表达式的 NoneBot 插件"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -23,7 +23,13 @@ Homepage = "https://github.com/Ltiiatn/nonebot-plugin-number-meme"
 Repository = "https://github.com/Ltiiatn/nonebot-plugin-number-meme"
 
 [project.optional-dependencies]
-dev = ["pytest", "pytest-asyncio", "nonebug", "ruff"]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "ruff",
+    # 测试里会调用 nonebot.init()，需要带一个驱动，否则 CI 上会 ImportError
+    "nonebot2[fastapi]>=2.4.0",
+]
 
 [tool.nonebot]
 plugins = ["nonebot_plugin_number_meme"]
