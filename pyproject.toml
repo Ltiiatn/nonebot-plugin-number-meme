@@ -1,0 +1,47 @@
+[project]
+name = "nonebot-plugin-number-meme"
+version = "0.1.0"
+description = "把数字改写成「114514」或「6/7」风格等值表达式的 NoneBot 插件"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "DXXLT" }]
+keywords = ["nonebot", "nonebot2", "plugin", "homo", "114514", "67", "six-seven", "number-meme"]
+classifiers = [
+    "Framework :: Robot Framework",
+    "Framework :: Robot Framework :: Library",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+]
+dependencies = [
+    "nonebot2>=2.4.0",
+    "nonebot-adapter-onebot>=2.4.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Ltiiatn/nonebot-plugin-number-meme"
+Repository = "https://github.com/Ltiiatn/nonebot-plugin-number-meme"
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-asyncio", "nonebug", "ruff"]
+
+[tool.nonebot]
+plugins = ["nonebot_plugin_number_meme"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["nonebot_plugin_number_meme"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "session"
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["F", "E", "W", "I", "UP", "B", "SIM", "RET"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
